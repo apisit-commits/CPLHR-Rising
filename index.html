@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>CPLHR-Rising</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f3a5f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="CPLHR-Rising">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  html,body{margin:0;height:100%;background:#1f3a5f;overflow:hidden}
+  body{padding-top:env(safe-area-inset-top);box-sizing:border-box}
+  iframe{display:block;width:100%;height:100%;border:0;background:#f3f5f9}
+  #splash{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    background:linear-gradient(160deg,#1f3a5f,#2c5282);color:#fff;font:600 20px system-ui,sans-serif;transition:opacity .3s}
+  #splash img{width:96px;height:96px;border-radius:22px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+  #splash.hide{opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="splash"><img src="icon-512.png" alt="">CPLHR-Rising</div>
+<script>
+  // ลิงก์เว็บแอปจาก Apps Script (ลงท้ายด้วย /exec)
+  const APP_URL = 'https://script.google.com/macros/s/วางรหัสของคุณที่นี่/exec';
+
+  const f = document.createElement('iframe');
+  f.src = APP_URL;
+  f.allow = 'geolocation *; camera *; clipboard-write *';
+  f.onload = () => document.getElementById('splash').classList.add('hide');
+  document.body.appendChild(f);
+  setTimeout(() => document.getElementById('splash').classList.add('hide'), 8000);
+
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+</body>
+</html>
